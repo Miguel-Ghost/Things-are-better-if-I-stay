@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ramo de Flores Centrado</title>
+  <style>
+    /* --- RESET BÁSICO --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 100%;
+      height: 100vh;
+      background: #000;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* CONTENEDOR GENERAL */
+    .garden {
+      position: relative;
+      width: 600px;
+      /* Ajusta a tu gusto */
+      height: 600px;
+      /* Ajusta a tu gusto */
+      /* border: 1px dashed #666;  <-- Úsalo si quieres ver el contenedor */
+    }
+
+    /* CADA FLOR */
+    .flower {
+      position: absolute;
+      width: 200px;
+      height: 200px;
+      animation: pulsate 2s infinite;
+    }
+
+    /* ANIMACIÓN DE "PALPITACIÓN" */
+    @keyframes pulsate {
+      0% {
+        transform: scale(1.2);
+      }
+
+      50% {
+        transform: scale(1.3);
+      }
+
+      100% {
+        transform: scale(1.2);
+      }
+    }
+
+    /* CENTRO DE LA FLOR 
+       Usamos top:50%, left:50% y translate(-50%, -50%) para
+       situarlo exactamente en el centro de su .flower padre. */
+    .mid {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #000, #ff5e00, #000);
+      background-size: 5px 5px;
+      filter: drop-shadow(0 0 8px #682600);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 4;
+    }
+
+    /* --- PÉTALOS ---
+       Cada grupo (.Petal1, .Petal2, .Petal3) corresponde a “capas” 
+       con distinta posición z y color. 
+       Todos se ubican en top:50%, left:50% y se rotan alrededor del centro.
+       Para que roten como “radio” de la flor, usamos transform-origin: 
+         0 50%  (el borde izquierdo, verticalmente centrado).
+       Así, la esquina izquierda del pétalo queda en el centro de la flor. 
+    */
+
+    .Petal1,
+    .Petal2,
+    .Petal3 {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform-origin: 0 50%;
+      /* pivote en el borde izquierdo */
+      border-radius: 50%;
+    }
+
+    /* --- CAPA 1 (pétalos anaranjados más pequeños) --- */
+    .Petal1 {
+      width: 120px;
+      height: 30px;
+      background: radial-gradient(circle, #ff5e00, #ffbb00);
+      filter: drop-shadow(0 0 5px #e05200);
+      z-index: 3;
+    }
+
+    /* Rotaciones para 4 pétalos */
+    .Petal1.p1 {
+      transform: rotate(22.5deg);
+    }
+
+    .Petal1.p2 {
+      transform: rotate(67.5deg);
+    }
+
+    .Petal1.p3 {
+      transform: rotate(110.5deg);
+    }
+
+    .Petal1.p4 {
+      transform: rotate(157.5deg);
+    }
+
+    /* --- CAPA 2 (pétalos más grandes) --- */
+    .Petal2 {
+      width: 160px;
+      height: 40px;
+      background: radial-gradient(circle, #ff5e00, #fbd702);
+      filter: drop-shadow(0 0 5px #e05200);
+      z-index: 2;
+    }
+
+    .Petal2.p1 {
+      transform: rotate(0deg);
+    }
+
+    .Petal2.p2 {
+      transform: rotate(45deg);
+    }
+
+    .Petal2.p3 {
+      transform: rotate(90deg);
+    }
+
+    .Petal2.p4 {
+      transform: rotate(135deg);
+    }
+
+    /* --- CAPA 3 (pétalos en otra posición) --- */
+    .Petal3 {
+      width: 160px;
+      height: 40px;
+      background: radial-gradient(circle, #ff5e00, #fbd702);
+      filter: drop-shadow(0 0 2px #fbd702);
+      z-index: 1;
+    }
+
+    .Petal3.p1 {
+      transform: rotate(180deg);
+    }
+
+    .Petal3.p2 {
+      transform: rotate(225deg);
+    }
+
+    .Petal3.p3 {
+      transform: rotate(270deg);
+    }
+
+    .Petal3.p4 {
+      transform: rotate(315deg);
+    }
+
+
+    /* --- POSICIONES DE LAS 5 FLORES DENTRO DEL RAMO --- */
+    /* Flor central */
+    #fCenter {
+      top: 200px;
+      left: 200px;
+    }
+
+    /* Alrededor (arriba, derecha, abajo, izquierda). Ajusta a tu gusto */
+    #fTop {
+      top: 60px;
+      left: 200px;
+    }
+
+    #fRight {
+      top: 200px;
+      left: 340px;
+    }
+
+    #fBottom {
+      top: 330px;
+      left: 200px;
+    }
+
+    #fLeft {
+      top: 200px;
+      left: 60px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="garden">
+
+    <!-- FLOR CENTRAL -->
+    <div class="flower" id="fCenter">
+      <div class="mid"></div>
+      <!-- Pétalos Pequeños (Petal1) -->
+      <div class="Petal1 p1"></div>
+      <div class="Petal1 p2"></div>
+      <div class="Petal1 p3"></div>
+      <div class="Petal1 p4"></div>
+      <!-- Pétalos Grandes (Petal2) -->
+      <div class="Petal2 p1"></div>
+      <div class="Petal2 p2"></div>
+      <div class="Petal2 p3"></div>
+      <div class="Petal2 p4"></div>
+      <!-- Pétalos Extra (Petal3) -->
+      <div class="Petal3 p1"></div>
+      <div class="Petal3 p2"></div>
+      <div class="Petal3 p3"></div>
+      <div class="Petal3 p4"></div>
+    </div>
+
+    <!-- FLOR ARRIBA -->
+    <div class="flower" id="fTop">
+      <div class="mid"></div>
+      <div class="Petal1 p1"></div>
+      <div class="Petal1 p2"></div>
+      <div class="Petal1 p3"></div>
+      <div class="Petal1 p4"></div>
+      <div class="Petal2 p1"></div>
+      <div class="Petal2 p2"></div>
+      <div class="Petal2 p3"></div>
+      <div class="Petal2 p4"></div>
+      <div class="Petal3 p1"></div>
+      <div class="Petal3 p2"></div>
+      <div class="Petal3 p3"></div>
+      <div class="Petal3 p4"></div>
+    </div>
+
+    <!-- FLOR DERECHA -->
+    <div class="flower" id="fRight">
+      <div class="mid"></div>
+      <div class="Petal1 p1"></div>
+      <div class="Petal1 p2"></div>
+      <div class="Petal1 p3"></div>
+      <div class="Petal1 p4"></div>
+      <div class="Petal2 p1"></div>
+      <div class="Petal2 p2"></div>
+      <div class="Petal2 p3"></div>
+      <div class="Petal2 p4"></div>
+      <div class="Petal3 p1"></div>
+      <div class="Petal3 p2"></div>
+      <div class="Petal3 p3"></div>
+      <div class="Petal3 p4"></div>
+    </div>
+
+    <!-- FLOR ABAJO -->
+    <div class="flower" id="fBottom">
+      <div class="mid"></div>
+      <div class="Petal1 p1"></div>
+      <div class="Petal1 p2"></div>
+      <div class="Petal1 p3"></div>
+      <div class="Petal1 p4"></div>
+      <div class="Petal2 p1"></div>
+      <div class="Petal2 p2"></div>
+      <div class="Petal2 p3"></div>
+      <div class="Petal2 p4"></div>
+      <div class="Petal3 p1"></div>
+      <div class="Petal3 p2"></div>
+      <div class="Petal3 p3"></div>
+      <div class="Petal3 p4"></div>
+    </div>
+
+    <!-- FLOR IZQUIERDA -->
+    <div class="flower" id="fLeft">
+      <div class="mid"></div>
+      <div class="Petal1 p1"></div>
+      <div class="Petal1 p2"></div>
+      <div class="Petal1 p3"></div>
+      <div class="Petal1 p4"></div>
+      <div class="Petal2 p1"></div>
+      <div class="Petal2 p2"></div>
+      <div class="Petal2 p3"></div>
+      <div class="Petal2 p4"></div>
+      <div class="Petal3 p1"></div>
+      <div class="Petal3 p2"></div>
+      <div class="Petal3 p3"></div>
+      <div class="Petal3 p4"></div>
+    </div>
+
+  </div>
+</body>
+
+</html>
